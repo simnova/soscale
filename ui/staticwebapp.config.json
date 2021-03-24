@@ -17,7 +17,8 @@
       {
           "route": "/api/*",
           "methods": [ "GET" ],
-          "allowedRoles": ["registeredusers"]
+          "allowedRoles": ["registeredusers"],
+
       },
       {
           "route": "/api/*",
@@ -26,6 +27,11 @@
       },
       {
           "route": "/api/*",
+          "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, HEAD, DELETE, PATCH",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+          }
       },
       {
           "route": "/customers/contoso",
