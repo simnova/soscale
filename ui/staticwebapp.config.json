@@ -21,6 +21,7 @@
     {
       "route": "/api/*",
       "headers": {
+        "Server": "",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "SAMEORIGIN",
         "Access-Control-Allow-Credentials": "true",
