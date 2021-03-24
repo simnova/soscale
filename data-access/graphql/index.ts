@@ -18,7 +18,7 @@ const resolvers = {
 const getPlaygroundSetting = () => {
   if (process.env.APOLLO_PLAYGROUND_VISIBLE === "true") {
     if (process.env.PLAYGROUND_URI) {
-      return { endpoint: process.env.PLAYGROUND_URI }
+      return { endpoint: "api/graphql" }
     }
     return true
   } else {
