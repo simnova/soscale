@@ -15,11 +15,22 @@ const resolvers = {
   },
 };
 
+const getPlaygroundSetting = () => {
+  if (process.env.APOLLO_PLAYGROUND_VISIBLE === "true") {
+    if (process.env.PLAYGROUND_URI) {
+      return { endpoint: process.env.PLAYGROUND_URI }
+    }
+    return true
+  } else {
+    return false
+  }
+}
+
 const server = new ApolloServer(
   { 
   typeDefs, 
   resolvers, 
-  playground:true 
+  playground: getPlaygroundSetting(),
   },
 );
 
