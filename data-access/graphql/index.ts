@@ -27,10 +27,17 @@ const graphqlHandler = (server, context, req) => {
   const graphqlHandlerObj = server.createHandler({
     cors: {
       origin: "*",
-      preflightContinue: false, 
+      preflightContinue: true, 
       credentials: true,
     },
   })
+
+/*
+  "Access-Control-Allow-Credentials": "true",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, HEAD, DELETE, PATCH",
+  "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization, X-Apollo-Tracing, Apollo-Query-Plan-Experimental",
+*/
 
   // https://github.com/Azure/azure-functions-host/issues/6013
   req.headers["x-ms-privatelink-id"] = ""
@@ -38,6 +45,10 @@ const graphqlHandler = (server, context, req) => {
   req.headers["Access-Control-Request-Headers"] =
     req.headers["Access-Control-Request-Headers"] ||
     req.headers["access-control-request-headers"]
+
+  req.headers["server"] = null;
+  req.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS, PUT, HEAD, DELETE, PATCH";
+
   return graphqlHandlerObj(context, req)
 }
 
