@@ -23,7 +23,8 @@
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, HEAD, DELETE, PATCH",
-        "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
+        "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net"
       }
     },
     {
