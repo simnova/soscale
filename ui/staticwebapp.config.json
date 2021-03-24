@@ -19,7 +19,7 @@
       }
     },
     {
-      "route": "/api/graphql/*",
+      "route": "/api/*",
       "headers": {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "SAMEORIGIN",
