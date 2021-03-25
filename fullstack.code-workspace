@@ -11,7 +11,8 @@
 		}
 	],
 	"settings": {
-		"debug.internalConsoleOptions": "neverOpen"
+		"debug.internalConsoleOptions": "neverOpen",
+		"workbench.colorTheme": "Tomorrow Night Blue"
 	},
 	"launch": {
 		"version": "0.2.0",

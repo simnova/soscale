@@ -33,6 +33,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env: 
           INLINE_RUNTIME_CHUNK: 'false'
+          REACT_APP_GRAPH_SERVER: '/api/graphql'
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

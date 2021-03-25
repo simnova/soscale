@@ -2,11 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import ApolloConnection from './components/core/apollo-connection';
+import MsalProvider from './components/msal-react-lite';
+import MsalProviderConfig from './config/msal-config';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>    
+      <MsalProvider config={MsalProviderConfig}>
+        <ApolloConnection>
+          <App />
+        </ApolloConnection>
+      </MsalProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
