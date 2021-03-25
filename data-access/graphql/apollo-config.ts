@@ -2,6 +2,7 @@ import { ApolloServer, Config, gql, PlaygroundConfig  }  from 'apollo-server-azu
 
 import { HttpRequest, Context } from "@azure/functions";
 import  * as TypeDefs from "./typedefs/";
+import  * as Resolvers from  "./resolvers"
 import {  DocumentNode } from 'graphql';
 
 
@@ -23,13 +24,14 @@ const getTypeDefs = (): DocumentNode[] => {
 }
 
 
-
+/*
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
     hello: () => 'Hello world!',
   },
 };
+*/
 
 const getPlaygroundSetting = () : PlaygroundConfig  => {
   if (process.env.APOLLO_PLAYGROUND_VISIBLE === "true") {
@@ -41,7 +43,7 @@ const getPlaygroundSetting = () : PlaygroundConfig  => {
 
 var config : Config = {
   typeDefs: getTypeDefs(),
-  resolvers: resolvers,
+  resolvers: Resolvers,
   playground: getPlaygroundSetting() 
 }
 
