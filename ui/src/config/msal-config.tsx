@@ -21,7 +21,7 @@ const tenantAuthority = `https://login.microsoftonline.com/${tenantId}`; // allo
 
 const appAuthority = tenantAuthority; //to allow any user to sign up must choose commonAuthority
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 var msalProviderPopupConfig: MsalProviderPopupConfig = {
   type: "popup",
   msalConfig: {
@@ -63,6 +63,7 @@ var msalProviderPopupConfig: MsalProviderPopupConfig = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   type: "redirect",
   msalConfig: {
