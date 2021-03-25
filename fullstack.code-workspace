@@ -1,33 +1,35 @@
 {
-	"folders": [
-		{
-			"path": "ui"
-		},
-		{
-			"path": "data-access"
-		},
-		{
-			"path": ".github"
-		}
-	],
-	"settings": {
-		"debug.internalConsoleOptions": "neverOpen",
-		"workbench.colorTheme": "Tomorrow Night Blue"
-	},
-	"launch": {
-		"version": "0.2.0",
-		"compounds": [{
-			"name": "full-stack",
-			"configurations": [
-			  {
-				"folder": "ui",
-				"name": "Launch Chrome"
-			  },
-			  {
-				"folder": "data-access",
-				"name": "Attach to Node Functions"
-			  }
-			]
-		}],
-	}
+  "folders": [
+    {
+      "path": "ui"
+    },
+    {
+      "path": "data-access"
+    },
+    {
+      "path": ".github"
+    }
+  ],
+  "settings": {
+    "debug.internalConsoleOptions": "neverOpen",
+    "workbench.colorTheme": "Tomorrow Night Blue"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "compounds": [
+      {
+        "name": "full-stack",
+        "configurations": [
+          {
+            "folder": "data-access",
+            "name": "Attach to Node Functions"
+          },
+          {
+            "folder": "ui",
+            "name": "Launch Chrome"
+          }
+        ]
+      }
+    ]
+  }
 }
