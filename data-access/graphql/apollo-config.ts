@@ -1,7 +1,7 @@
 import { ApolloServer, Config, gql, PlaygroundConfig  }  from 'apollo-server-azure-functions';
 
 import { HttpRequest, Context } from "@azure/functions";
-import  TypeDefs from "./typedefs/";
+import  * as TypeDefs from "./typedefs/";
 import { DefinitionNode, DocumentNode } from 'graphql';
 //import { DocumentNode } from 'graphql';
 
@@ -17,11 +17,12 @@ const baseTypeDef = gql`
   }
 `;
 
-
+var TypeDefArray = (Object.values<DocumentNode>(TypeDefs))
+//TypeDefs.hello
 //TypeDefs
 //var TypeDefArray = baseTypeDef.concat(Object.values<DocumentNode>(TypeDefs)) ;//Object.values<DocumentNode>(TypeDefs)[0].definitions;
 
-TypeDefs.unshift(baseTypeDef);
+TypeDefArray.unshift(baseTypeDef);
 //.values() = baseTypeDef;
 
 // Provide resolver functions for your schema fields
@@ -40,7 +41,7 @@ const getPlaygroundSetting = () : PlaygroundConfig  => {
 }
 
 var config : Config = {
-  typeDefs: TypeDefs,
+  typeDefs: TypeDefArray,
   resolvers: resolvers,
   playground: getPlaygroundSetting() 
 }
