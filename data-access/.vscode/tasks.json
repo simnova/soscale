@@ -26,6 +26,11 @@
 			"command": "npm prune --production",
 			"dependsOn": "npm build",
 			"problemMatcher": []
-		}
+		},
+    {
+      "label": "kill-terminal",
+      "type": "process",
+      "command": "${command:workbench.action.terminal.kill}"
+    }
 	]
 }

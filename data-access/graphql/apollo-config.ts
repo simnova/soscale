@@ -1,14 +1,12 @@
+import { HttpRequest, Context } from '@azure/functions';
 import { ApolloServer, Config, gql, PlaygroundConfig  }  from 'apollo-server-azure-functions';
+import { DocumentNode } from 'graphql';
+import  * as TypeDefs from './typedefs/';
+import  * as Resolvers from  './resolvers';
 
-import { HttpRequest, Context } from "@azure/functions";
-import  * as TypeDefs from "./typedefs/";
-import  * as Resolvers from  "./resolvers"
-import {  DocumentNode } from 'graphql';
-
-
-// Construct a schema, using GraphQL schema language
 
 const getTypeDefs = (): DocumentNode[] => {
+  //in order to do extend for a type, you need a type to start, so we put in _empty ones to get things going.
   const baseTypeDef = gql`
     type Mutation {
         _empty:String
@@ -22,16 +20,6 @@ const getTypeDefs = (): DocumentNode[] => {
   typeDefArray.unshift(baseTypeDef);
   return typeDefArray;
 }
-
-
-/*
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-};
-*/
 
 const getPlaygroundSetting = () : PlaygroundConfig  => {
   if (process.env.APOLLO_PLAYGROUND_VISIBLE === "true") {
@@ -57,13 +45,6 @@ const graphqlHandler = (context: Context, req: HttpRequest) => {
     },
   })
 
-/*
-  "Access-Control-Allow-Credentials": "true",
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, HEAD, DELETE, PATCH",
-  "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization, X-Apollo-Tracing, Apollo-Query-Plan-Experimental",
-*/
-
   // https://github.com/Azure/azure-functions-host/issues/6013
   req.headers["x-ms-privatelink-id"] = ""
   // apollo-server only reads this specific string
@@ -76,9 +57,6 @@ const graphqlHandler = (context: Context, req: HttpRequest) => {
 
   return graphqlHandlerObj(context, req)
 }
-
-
-
 
 const startup = async ( callback:() => Promise<void> ) =>{
   await callback();

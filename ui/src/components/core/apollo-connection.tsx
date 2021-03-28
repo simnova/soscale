@@ -12,6 +12,7 @@ import { setContext } from '@apollo/client/link/context';
 import { useMsal } from '../msal-react-lite';
 
 const ApolloConnection: FC<any> = (props) => {
+
   const { getAuthToken, isLoggedIn } = useMsal();
 
   const withToken = setContext(async (_, { headers }) => {
@@ -29,16 +30,22 @@ const ApolloConnection: FC<any> = (props) => {
   });
 
   const cache = new InMemoryCache();
-
+  
   const client = new ApolloClient({
     link: from([withToken, httpLink]),
     cache: cache,
   });
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && client) {
       (async () => {
-        await client.resetStore(); //clear Apollo cache when user logs off
+        try{  // will throw exception if not connected
+          await client.resetStore(); //clear Apollo cache when user logs off
+        } catch(err){
+          if(err.message !== 'Failed to fetch'){
+            console.error("Apollo Reset error",err);
+          }
+        }
       })();
     }
   }, [isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps

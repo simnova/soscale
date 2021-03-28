@@ -1,9 +1,11 @@
-import React from 'react';
+import {FC} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import HelloWord from './components/hello-world';
+import Login from './layouts/account/login';
 
-function App() {
+const App: FC<any> = (props) => {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +23,7 @@ function App() {
         </a>
         <br/>
         <HelloWord />
+        <Login />
       </header>
     </div>
   );
