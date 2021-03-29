@@ -1,14 +1,21 @@
 import { FC } from 'react';
 import {Row,Col,Button } from 'antd';
 import { useMsal } from '../../components/msal-react-lite';
+import { RouteComponentProps } from "react-router";
+import { withRouter } from 'react-router-dom';
 
-const Login: FC<any> = () => {
-  const {login} = useMsal();
+const Login: FC<RouteComponentProps | any> = (props) => {
+  const {login,getAuthToken} = useMsal();
 
   const loginAction = async (loginType:string) => {
-    login(loginType)
+    await login(loginType)
+    var authToken = await getAuthToken(loginType);
+    if (!(authToken === null || typeof authToken === "undefined")) {
+      props.history.push({
+        pathname: loginType === "popupconfig" ? "/passwordlessProfile" : "/assignedProfile"
+      });
+    }
   }
-
 
   return (
     <>
@@ -26,4 +33,4 @@ const Login: FC<any> = () => {
   )
 }
 
-export default Login;
+export default withRouter(Login);

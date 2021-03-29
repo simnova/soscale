@@ -67,6 +67,48 @@ var msalProviderPopupConfig: MsalProviderPopupConfig = {
   },
 };
 
+var msalProviderPopupConfigUsername: MsalProviderPopupConfig = {
+  type: ConfigType.Popup,
+  msalConfig: {
+    auth: {
+      clientId: clientId,
+      authority: b2cAuthority,
+      redirectUri: redirectUri,
+    },
+    system: {
+      loggerOptions: {
+        loggerCallback: (level, message, containsPii) => {
+          if (containsPii) {
+            return;
+          }
+          switch (level) {
+            case msal.LogLevel.Error:
+              console.error(message);
+              return;
+            case msal.LogLevel.Info:
+              console.info(message);
+              return;
+            case msal.LogLevel.Verbose:
+              console.debug(message);
+              return;
+            case msal.LogLevel.Warning:
+              console.warn(message);
+              return;
+          }
+        },
+      },
+    },
+  },
+  silentRequestConfig: {
+    scopes: [scopes],
+  },
+  endSessionRequestConfig: {},
+  loginRequestConfig: {
+    scopes: [scopes],
+  },
+};
+
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   type: ConfigType.Redirect,
@@ -115,7 +157,7 @@ var msalProviderConfig:MsalProviderConfigMap = {
   type: ConfigType.Map,
   config:new Map<string,MsalProviderPopupConfig|MsalProviderRedirectConfig>([
           ["popupconfig",msalProviderPopupConfig],
-          ["redirectconfig",msalProviderRedirectConfig]
+          ["redirectconfig",msalProviderPopupConfigUsername]
         ])
 } //when using Facebook Login - cannot use pop-up, login UI doesn't render correctly.
 

@@ -1,30 +1,30 @@
 import {FC} from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-import HelloWord from './components/hello-world';
+import Main from './layouts/main';
 import Login from './layouts/account/login';
+import AssignedProfile from './layouts/account/assigned-profile';
+import PasswordlessProfile from './layouts/account/passwordless-profile';
+import { Switch, Route } from 'react-router-dom';
 
 const App: FC<any> = (props) => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <br/>
-        <HelloWord />
-        <Login />
-      </header>
+      <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route path="/assignedProfile">
+          <AssignedProfile></AssignedProfile>
+        </Route>
+        <Route path="/passwordlessProfile">
+          <PasswordlessProfile></PasswordlessProfile>
+        </Route>
+        <Route exact path="/">
+          <Main></Main>
+        </Route>
+      </Switch>
     </div>
   );
 }
