@@ -39,7 +39,7 @@
       ]
     },
     {
-      "route": "/login",
+      "route": "/loginxxx",
       "rewrite": "/.auth/login/github"
     },
     {
@@ -47,7 +47,7 @@
       "statusCode": 404
     },
     {
-      "route": "/logout",
+      "route": "/logoutxx",
       "redirect": "/.auth/logout"
     },
     {
