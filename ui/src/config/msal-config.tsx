@@ -21,7 +21,10 @@ const b2cAuthority = process.env.REACT_APP_REDIRECT_AUTHORITY ?? "missing-redire
 const commonAuthority = `https://login.microsoftonline.com/common`; //allows for anyone to register not just AAD accounts
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const tenantAuthority = `https://login.microsoftonline.com/${tenantId}`; // allows ONLY for Other AAD accounts to register
+//const tenantAuthority = `https://login.microsoftonline.com/${tenantId}`; // allows ONLY for Other AAD accounts to register
+const tenantAuthority = `https://login.microsoftonline.com/${tenantId}.onmicrosoft.com`; // allows ONLY for Other AAD accounts to register
+
+//"https://login.microsoftonline.com/{tenant name}.onmicrosoft.com"
 
 const appAuthority = tenantAuthority; //to allow any user to sign up must choose commonAuthority
 

@@ -35,6 +35,7 @@ jobs:
         env: 
           INLINE_RUNTIME_CHUNK: 'false'
           REACT_APP_GRAPH_SERVER: '/api/graphql'
+          REACT_APP_AAD_SCOPES: 'openid'
           REACT_APP_AAD_APP_CLIENTID: ${{ secrets.REACT_APP_AAD_APP_CLIENTID }}
           REACT_APP_AAD_DIRECTORY_TENANTID: ${{ secrets.REACT_APP_AAD_DIRECTORY_TENANTID }}
           REACT_APP_AAD_REDIRECT_URI: ${{ secrets.REACT_APP_AAD_REDIRECT_URI }}
