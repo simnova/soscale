@@ -15,6 +15,9 @@ var scopes = process.env.REACT_APP_AAD_SCOPES ?? "missing-scopes";
 //login.windows-ppe.net
 //login.windows.net/
 
+const b2cAuthority = process.env.REACT_APP_REDIRECT_AUTHORITY ?? "missing-redirect-authority"
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const commonAuthority = `https://login.microsoftonline.com/common`; //allows for anyone to register not just AAD accounts
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -70,7 +73,7 @@ var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   msalConfig: {
     auth: {
       clientId: clientId,
-      authority: commonAuthority,
+      authority: b2cAuthority,
       redirectUri: redirectUri,
     },
     system: {
