@@ -6,7 +6,7 @@ const PasswordlessProfile: FC<any> = () => {
 
   return (
     <>
-      {getIsLoggedIn('redirectconfig')? 
+      {getIsLoggedIn('popupconfig')? 
       <div>Hello Friend</div> 
       : 
       <div>Goodby Strangerr</div>
