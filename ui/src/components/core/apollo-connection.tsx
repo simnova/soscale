@@ -11,18 +11,33 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { useMsal } from '../msal-react-lite';
 
+export interface AuthProps {
+  AuthenticationIdentifier?: string
+}
+
 const ApolloConnection: FC<any> = (props) => {
 
-  const { getAuthToken, isLoggedIn } = useMsal();
+  const { getAuthToken, getIsLoggedIn } = useMsal();
 
+  const hasAuth = props.AuthenticationIdentifier !== null && typeof props.AuthenticationIdentifier !== "undefined";
+  
   const withToken = setContext(async (_, { headers }) => {
-    const token = await getAuthToken();
-    return {
-      headers: {
-        ...headers,
-        Authorization: token ? `Bearer ${token}` : null,
-      },
-    };
+    if(hasAuth){
+      const token = await getAuthToken(props.AuthenticationIdentifier);
+      return {
+        headers: {
+          ...headers,
+          Authorization: token ? `Bearer ${token}` : null,
+        },
+      };
+    }else {
+      return {
+        headers: {
+          ...headers
+        },
+      };
+    }
+    
   });
 
   const httpLink = createHttpLink({
@@ -36,8 +51,10 @@ const ApolloConnection: FC<any> = (props) => {
     cache: cache,
   });
 
+  
+  
   useEffect(() => {
-    if (!isLoggedIn && client) {
+    if (hasAuth && !getIsLoggedIn(props.AuthenticationIdentifier) && client) {
       (async () => {
         try{  // will throw exception if not connected
           await client.resetStore(); //clear Apollo cache when user logs off
@@ -48,8 +65,8 @@ const ApolloConnection: FC<any> = (props) => {
         }
       })();
     }
-  }, [isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [getIsLoggedIn,hasAuth, props.AuthenticationIdentifier]); // eslint-disable-line react-hooks/exhaustive-deps
+  
   return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
 };
 

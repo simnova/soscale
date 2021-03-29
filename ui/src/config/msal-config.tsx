@@ -3,6 +3,7 @@ import {
   MsalProviderRedirectConfig,
 } from '../components/msal-react-lite';
 import * as msal from '@azure/msal-browser';
+import { ConfigType } from '../components/msal-react-lite/msal-provider';
 
 var clientId = process.env.REACT_APP_AAD_APP_CLIENTID ?? "missing-client-id";
 var tenantId =
@@ -23,7 +24,7 @@ const appAuthority = tenantAuthority; //to allow any user to sign up must choose
 
 
 var msalProviderPopupConfig: MsalProviderPopupConfig = {
-  type: "popup",
+  type: ConfigType.Popup,
   msalConfig: {
     auth: {
       clientId: clientId,
@@ -65,7 +66,7 @@ var msalProviderPopupConfig: MsalProviderPopupConfig = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
-  type: "redirect",
+  type: ConfigType.Redirect,
   msalConfig: {
     auth: {
       clientId: clientId,
@@ -105,6 +106,17 @@ var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   },
 };
 
-var msalProviderConfig = msalProviderPopupConfig; //when using Facebook Login - cannot use pop-up, login UI doesn't render correctly.
+export interface MsalProviderConfigMap {
+  type: ConfigType.Map;
+  config: Map<string, (MsalProviderPopupConfig | MsalProviderRedirectConfig)>;
+}
+
+var msalProviderConfig:MsalProviderConfigMap = {
+  type: ConfigType.Map,
+  config:new Map<string,MsalProviderPopupConfig|MsalProviderRedirectConfig>([
+          ["popupconfig",msalProviderPopupConfig],
+          ["redirectconfig",msalProviderRedirectConfig]
+        ])
+} //when using Facebook Login - cannot use pop-up, login UI doesn't render correctly.
 
 export default msalProviderConfig;
