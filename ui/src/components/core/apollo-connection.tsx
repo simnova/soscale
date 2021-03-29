@@ -37,7 +37,6 @@ const ApolloConnection: FC<any> = (props) => {
         },
       };
     }
-    
   });
 
   const httpLink = createHttpLink({
@@ -51,8 +50,6 @@ const ApolloConnection: FC<any> = (props) => {
     cache: cache,
   });
 
-  
-  
   useEffect(() => {
     if (hasAuth && !getIsLoggedIn(props.AuthenticationIdentifier) && client) {
       (async () => {

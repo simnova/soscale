@@ -3,7 +3,7 @@ import {
   MsalProviderRedirectConfig,
 } from '../components/msal-react-lite';
 import * as msal from '@azure/msal-browser';
-import { ConfigType } from '../components/msal-react-lite/msal-provider';
+import { ConfigType, MsalProviderConfigMap } from '../components/msal-react-lite/msal-provider';
 
 var clientId = process.env.REACT_APP_AAD_APP_CLIENTID ?? "missing-client-id";
 var tenantId =
@@ -109,10 +109,7 @@ var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   },
 };
 
-export interface MsalProviderConfigMap {
-  type: ConfigType.Map;
-  config: Map<string, (MsalProviderPopupConfig | MsalProviderRedirectConfig)>;
-}
+
 
 var msalProviderConfig:MsalProviderConfigMap = {
   type: ConfigType.Map,

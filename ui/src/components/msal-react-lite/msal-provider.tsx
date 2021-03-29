@@ -45,9 +45,6 @@ export type MsalProps = {
 
 
 const MsalProvider: FC<MsalProps> =  (props: MsalProps): JSX.Element => {
- // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  //const [homeAccountId, setHomeAccountId] = useState<string>();
- // var usePopup = props.config.type === "popup";
 
   let createApp = (identifer:string,config:MsalProviderPopupConfig | MsalProviderRedirectConfig): [string, MsalApp] => {
     return [
@@ -59,7 +56,6 @@ const MsalProvider: FC<MsalProps> =  (props: MsalProps): JSX.Element => {
         config)
       ];
   }
-
   
   let getMsalInstances = () => {
     if(props.config.type !== ConfigType.Map)
@@ -95,8 +91,6 @@ const MsalProvider: FC<MsalProps> =  (props: MsalProps): JSX.Element => {
     })
   }, [msalInstances]); // eslint-disable-line react-hooks/exhaustive-deps
 
-
-
   let findInstance =  (identifer:string | undefined) => {
     if(props.config.type !== ConfigType.Map && msalInstances.has("default")){
       return msalInstances.get("default")
@@ -106,18 +100,7 @@ const MsalProvider: FC<MsalProps> =  (props: MsalProps): JSX.Element => {
       throw new Error("need to supply identifier")
     }
   }
-   
-    
-/*
-    useEffect(() => {
-      msalInstance.handleRedirectPromise().then(async (authResult) => {
-        console.log('handle-redirect');
-        await handleRedirectResult(authResult);
-      });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  */
- //typeof findInstance(identifier) === "undefined" ? new Promise<string| undefined>(() => {return undefined}) :
-
+  
   return  (
     <MsalContext.Provider
       value={{
