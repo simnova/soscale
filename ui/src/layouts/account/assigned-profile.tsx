@@ -6,7 +6,7 @@ const AssignedProfile: FC<any> = () => {
 
   return (
     <>
-      {getIsLoggedIn('popupconfig')? 
+      {getIsLoggedIn('redirectconfig')? 
       <div>Hello Friend</div> 
       : 
       <div>Goodby Strangerr</div>
