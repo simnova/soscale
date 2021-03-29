@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import MsalContext from './msal-context';
 import * as msal from '@azure/msal-browser';
 import { MsalApp } from './msal-app';
@@ -85,6 +85,17 @@ const MsalProvider: FC<MsalProps> =  (props: MsalProps): JSX.Element => {
   }
 
   const msalInstances : Map<string,MsalApp>  = getMsalInstances();
+
+  useEffect(() => {
+    msalInstances.forEach((msalApp,key) => {
+      msalApp.MsalInstance.handleRedirectPromise().then(async (authResult) => {
+        console.log('handle-redirect');
+        await msalApp.handleRedirectResult(authResult);
+      });
+    })
+  }, [msalInstances]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
 
   let findInstance =  (identifer:string | undefined) => {
     if(props.config.type !== ConfigType.Map && msalInstances.has("default")){

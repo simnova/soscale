@@ -14,13 +14,15 @@ export class MsalApp {
   get IsLoggedIn() : boolean{
     return this.isLoggedIn;
   }
+  get MsalInstance() : PublicClientApplication{
+    return this.msalInstance;
+  }
   
   constructor(msalInstance : PublicClientApplication, config : MsalProviderPopupConfig | MsalProviderRedirectConfig){
     this.msalInstance = msalInstance;
     this.config = config;
     this.usePopup = config.type === ConfigType.Popup;
   }
-
   
   public async login() {
     if (this.usePopup) {
@@ -45,7 +47,7 @@ export class MsalApp {
       this.isLoggedIn = false;
       return undefined;
     }
-  };
+  }
 
   public async loginRedirect (
     redirectRequestConfig?: msal.RedirectRequest | undefined
@@ -55,7 +57,7 @@ export class MsalApp {
     } catch (err) {
       // handle error
     }
-  };
+  }
 
   public async handleRedirectResult (
     authResult: msal.AuthenticationResult | null
@@ -74,8 +76,7 @@ export class MsalApp {
       this.homeAccountId = authResult.account?.homeAccountId;
       this.getAuthResult(authResult.account?.homeAccountId);
     } 
-  };
-
+  }
 
   private getAccount (
     providedHomeAccountId?: string
@@ -101,7 +102,7 @@ export class MsalApp {
     providedHomeAccountId?: string
   ): Promise<string | undefined> {
     return (await this.getAuthResult(providedHomeAccountId))?.accessToken;
-  };
+  }
 
   public async getAuthResult  (
     providedHomeAccountId?: string
@@ -187,6 +188,5 @@ export class MsalApp {
     }
     this.isLoggedIn = false;
   }
-
 
 }
