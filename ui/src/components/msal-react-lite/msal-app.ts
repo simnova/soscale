@@ -1,11 +1,10 @@
-import { PublicClientApplication } from '@azure/msal-browser';
 import {  MsalProviderPopupConfig, MsalProviderRedirectConfig } from '.';
 import * as msal from '@azure/msal-browser';
 import { ConfigType } from './msal-provider';
 
 export class MsalApp {
 
-  private msalInstance : PublicClientApplication;
+  private msalInstance : msal.PublicClientApplication;
   private config : MsalProviderPopupConfig | MsalProviderRedirectConfig;
   private usePopup : boolean;
   private homeAccountId : string |undefined;
@@ -14,11 +13,11 @@ export class MsalApp {
   get IsLoggedIn() : boolean{
     return this.isLoggedIn;
   }
-  get MsalInstance() : PublicClientApplication{
+  get MsalInstance() : msal.PublicClientApplication{
     return this.msalInstance;
   }
   
-  constructor(msalInstance : PublicClientApplication, config : MsalProviderPopupConfig | MsalProviderRedirectConfig){
+  constructor(msalInstance : msal.PublicClientApplication, config : MsalProviderPopupConfig | MsalProviderRedirectConfig){
     this.msalInstance = msalInstance;
     this.config = config;
     this.usePopup = config.type === ConfigType.Popup;
@@ -27,7 +26,7 @@ export class MsalApp {
   public async login() {
     if (this.usePopup) {
       var popupConfig = this.config as MsalProviderPopupConfig;
-      return await this.loginPopup(popupConfig.loginRequestConfig);
+      return this.loginPopup(popupConfig.loginRequestConfig);
     } else {
       var redirectConfig = this.config as MsalProviderRedirectConfig;
       await this.loginRedirect(redirectConfig?.redirectRequestConfig);
