@@ -6,11 +6,12 @@ import * as msal from '@azure/msal-browser';
 import { ConfigType, MsalProviderConfigMap } from '../components/msal-react-lite/msal-provider';
 
 var clientId = process.env.REACT_APP_AAD_APP_CLIENTID ?? "missing-client-id";
-var tenantId =process.env.REACT_APP_AAD_DIRECTORY_TENANTID ?? "missing-tenant-id";
+//var tenantId =process.env.REACT_APP_AAD_DIRECTORY_TENANTID ?? "missing-tenant-id";
 var redirectUri = process.env.REACT_APP_AAD_REDIRECT_URI ?? "missing-redirect-uri";
 var scopes = process.env.REACT_APP_AAD_SCOPES ?? "missing-scopes";
 var knownAuthorities = process.env.REACT_APP_KNOWN_AUTHORITIES ?? "missing-known-authorities";
-const b2cAuthority = process.env.REACT_APP_REDIRECT_AUTHORITY ?? "missing-redirect-authority"
+const b2cAuthority = process.env.REACT_APP_REDIRECT_AUTHORITY ?? "missing-redirect-authority";
+const passwordlessAuthority = process.env.REACT_APP_PASSSWORDLESS_AUTHORITY ?? "missing-passwordless-authority";
 
 //login.windows-ppe.net
 //login.windows.net/
@@ -21,11 +22,11 @@ const commonAuthority = `https://login.microsoftonline.com/common`; //allows for
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 //const tenantAuthority = `https://login.microsoftonline.com/${tenantId}`; // allows ONLY for Other AAD accounts to register
-const tenantAuthority = `https://login.microsoftonline.com/${tenantId}.onmicrosoft.com`; // allows ONLY for Other AAD accounts to register
+//const tenantAuthority = `https://login.microsoftonline.com/${tenantId}.onmicrosoft.com`; // allows ONLY for Other AAD accounts to register
 
 //"https://login.microsoftonline.com/{tenant name}.onmicrosoft.com"
 
-const appAuthority = tenantAuthority; //to allow any user to sign up must choose commonAuthority
+//const appAuthority = tenantAuthority; //to allow any user to sign up must choose commonAuthority
 
 
 var msalProviderPopupConfig: MsalProviderPopupConfig = {
@@ -33,7 +34,7 @@ var msalProviderPopupConfig: MsalProviderPopupConfig = {
   msalConfig: {
     auth: {
       clientId: clientId,
-      authority: appAuthority,
+      authority: passwordlessAuthority,
       knownAuthorities: [knownAuthorities],
       redirectUri: redirectUri,
     },

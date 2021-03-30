@@ -41,6 +41,7 @@ jobs:
           REACT_APP_AAD_REDIRECT_URI: ${{ secrets.REACT_APP_AAD_REDIRECT_URI }}
           REACT_APP_REDIRECT_AUTHORITY: ${{ secrets.REACT_APP_REDIRECT_AUTHORITY }}
           REACT_APP_KNOWN_AUTHORITIES: ${{ secrets.REACT_APP_KNOWN_AUTHORITIES }}
+          REACT_APP_PASSSWORDLESS_AUTHORITY: ${{ secrets.REACT_APP_PASSSWORDLESS_AUTHORITY }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
