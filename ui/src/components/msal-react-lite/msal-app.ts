@@ -11,6 +11,7 @@ export class MsalApp {
   private isLoggedIn : boolean = false;
 
   get IsLoggedIn() : boolean{
+    console.log("getting logged in value");
     return this.isLoggedIn;
   }
   get MsalInstance() : msal.PublicClientApplication{
