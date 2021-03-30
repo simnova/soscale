@@ -12,7 +12,7 @@ const Login: FC<RouteComponentProps | any> = (props) => {
     var authToken = await getAuthToken(loginType);
     if (!(authToken === null || typeof authToken === "undefined")) {
       props.history.push({
-        pathname: loginType === "popupconfig" ? "/passwordlessProfile" : "/assignedProfile"
+        pathname: loginType === "passwordless" ? "/passwordlessProfile" : "/assignedProfile"
       });
     }
   }

@@ -1482,8 +1482,8 @@
           <DisplayName>Local Account SignIn</DisplayName>
           <Protocol Name="OpenIdConnect" />
           <Metadata>
-            <Item Key="client_id">ProxyIdentityExperienceFrameworkAppId</Item>
-            <Item Key="IdTokenAudience">IdentityExperienceFrameworkAppId</Item>
+            <Item Key="client_id">02c08fd7-2172-42cc-8ed3-7259ed5c9658</Item>
+            <Item Key="IdTokenAudience">a1e233a8-a407-4f8f-8430-4cbeb477c671</Item>
             <Item Key="UserMessageIfClaimsPrincipalDoesNotExist">We can't seem to find your account</Item>
             <Item Key="UserMessageIfInvalidPassword">Your password is incorrect</Item>
             <Item Key="UserMessageIfOldPasswordUsed">Looks like you used an old password</Item>
@@ -1499,8 +1499,8 @@
             <Item Key="HttpBinding">POST</Item>
           </Metadata>
           <InputClaims>
-            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="ProxyIdentityExperienceFrameworkAppId" />
-            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="IdentityExperienceFrameworkAppId" />
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="02c08fd7-2172-42cc-8ed3-7259ed5c9658" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="a1e233a8-a407-4f8f-8430-4cbeb477c671" />
             <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="username" Required="true" />
             <InputClaim ClaimTypeReferenceId="password" Required="true" />
             <InputClaim ClaimTypeReferenceId="grant_type" DefaultValue="password" />
