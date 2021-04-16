@@ -28,6 +28,7 @@
     "isomorphic-fetch": "^3.0.0",
     "mongoose": "^5.12.2",
     "passport": "^0.4.1",
-    "passport-http": "^0.3.0"
+    "passport-http": "^0.3.0",
+    "sendgrid": "^5.2.3"
   }
 }

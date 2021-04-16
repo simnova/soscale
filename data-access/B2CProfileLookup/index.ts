@@ -3,7 +3,6 @@
 import { createHandler } from 'azure-function-express';
 import express, { Router } from 'express';
 import passport from 'passport';
-import { GetUserByUserPrincipalName } from '../MSGraphAPI/helper';
 import { conflictError } from './interfaces';
 
 const app: express.Application = express();
@@ -49,21 +48,6 @@ router.route('/logIn').post((req, res) => {
   } catch (error) {
     console.error('oops', error);
   }
-});
-
-router.route('/submitEmails/:emails').get(async (req, res) => {
-  let emails = req.params.emails.split(',');
-  // check if emails (userPrincipalName) are existing
-  emails.forEach(async (email) => {
-    let existingUser = await GetUserByUserPrincipalName(email); // return {value:['businessPhones','displayName', ...]}
-    if (existingUser.value.length === 0) {
-      // new user, send invitation code
-      console.log('new user');
-    } else {
-      // existing user, send notification
-      console.log('existing user');
-    }
-  });
 });
 
 app.use('/api/B2CProfileLookup', router);
