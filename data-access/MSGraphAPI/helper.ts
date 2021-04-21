@@ -36,3 +36,14 @@ export async function GetUserByUserPrincipalName(userPrincipalName: string) {
       console.log(err);
     });
 }
+
+export async function SendInvitationLink(email: string, redirectURL) {
+  const invitation = {
+    invitedUserEmailAddress: email,
+    inviteRedirectUrl: redirectURL,
+    sendInvitationMessage: true,
+  };
+
+  let invitationResult = await client.api('/invitations').post(invitation);
+  console.log(invitationResult);
+}
