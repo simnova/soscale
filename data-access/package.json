@@ -19,6 +19,7 @@
   "dependencies": {
     "@azure/msal-node": "^1.0.2",
     "@microsoft/microsoft-graph-client": "^2.2.1",
+    "@sendgrid/mail": "^7.4.2",
     "@types/node": "^14.14.35",
     "apollo-server-azure-functions": "^2.21.2",
     "azure-function-express": "^2.0.0",
