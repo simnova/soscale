@@ -3,19 +3,30 @@ import {
   MsalProviderRedirectConfig,
 } from '../components/msal-react-lite';
 import * as msal from '@azure/msal-browser';
-import { ConfigType, MsalProviderConfigMap } from '../components/msal-react-lite/msal-provider';
+import {
+  ConfigType,
+  MsalProviderConfigMap,
+} from '../components/msal-react-lite/msal-provider';
 
-var clientId = process.env.REACT_APP_AAD_APP_CLIENTID ?? "missing-client-id";
+var clientId = process.env.REACT_APP_AAD_APP_CLIENTID ?? 'missing-client-id';
+var passwordless_clientId =
+  process.env.REACT_APP_AAD_APP_PASSWORLESS_CLIENTID ?? 'missing-client-id';
 //var tenantId =process.env.REACT_APP_AAD_DIRECTORY_TENANTID ?? "missing-tenant-id";
-var redirectUri = process.env.REACT_APP_AAD_REDIRECT_URI ?? "missing-redirect-uri";
-var scopes = process.env.REACT_APP_AAD_SCOPES ?? "missing-scopes";
-var knownAuthorities = process.env.REACT_APP_KNOWN_AUTHORITIES ?? "missing-known-authorities";
-const b2cAuthority = process.env.REACT_APP_REDIRECT_AUTHORITY ?? "missing-redirect-authority";
-const passwordlessAuthority = process.env.REACT_APP_PASSSWORDLESS_AUTHORITY ?? "missing-passwordless-authority";
+var redirectUri =
+  process.env.REACT_APP_AAD_REDIRECT_URI ?? 'missing-redirect-uri';
+var scopes = process.env.REACT_APP_AAD_SCOPES ?? 'missing-scopes';
+var passwordless_scopes =
+  process.env.REACT_APP_AAD_PASSWORDLESS_SCOPES ?? 'missing-scopes';
+var knownAuthorities =
+  process.env.REACT_APP_KNOWN_AUTHORITIES ?? 'missing-known-authorities';
+const b2cAuthority =
+  process.env.REACT_APP_REDIRECT_AUTHORITY ?? 'missing-redirect-authority';
+const passwordlessAuthority =
+  process.env.REACT_APP_PASSSWORDLESS_AUTHORITY ??
+  'missing-passwordless-authority';
 
 //login.windows-ppe.net
 //login.windows.net/
-
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const commonAuthority = `https://login.microsoftonline.com/common`; //allows for anyone to register not just AAD accounts
@@ -28,12 +39,11 @@ const commonAuthority = `https://login.microsoftonline.com/common`; //allows for
 
 //const appAuthority = tenantAuthority; //to allow any user to sign up must choose commonAuthority
 
-
 var msalProviderPopupConfig: MsalProviderPopupConfig = {
   type: ConfigType.Popup,
   msalConfig: {
     auth: {
-      clientId: clientId,
+      clientId: passwordless_clientId,
       authority: passwordlessAuthority,
       knownAuthorities: [knownAuthorities],
       redirectUri: redirectUri,
@@ -63,11 +73,11 @@ var msalProviderPopupConfig: MsalProviderPopupConfig = {
     },
   },
   silentRequestConfig: {
-    scopes: [scopes],
+    scopes: [passwordless_scopes],
   },
   endSessionRequestConfig: {},
   loginRequestConfig: {
-    scopes: [scopes],
+    scopes: [passwordless_scopes],
   },
 };
 
@@ -113,7 +123,6 @@ var msalProviderPopupConfigUsername: MsalProviderPopupConfig = {
   },
 };
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   type: ConfigType.Redirect,
@@ -156,14 +165,14 @@ var msalProviderRedirectConfig: MsalProviderRedirectConfig = {
   },
 };
 
-
-
-var msalProviderConfig:MsalProviderConfigMap = {
+var msalProviderConfig: MsalProviderConfigMap = {
   type: ConfigType.Map,
-  config:new Map<string,MsalProviderPopupConfig|MsalProviderRedirectConfig>([
-          ["passwordless",msalProviderPopupConfig],
-          ["assigned",msalProviderPopupConfigUsername]
-        ])
-} //when using Facebook Login - cannot use pop-up, login UI doesn't render correctly.
+  config: new Map<string, MsalProviderPopupConfig | MsalProviderRedirectConfig>(
+    [
+      ['passwordless', msalProviderPopupConfig],
+      ['assigned', msalProviderPopupConfigUsername],
+    ]
+  ),
+}; //when using Facebook Login - cannot use pop-up, login UI doesn't render correctly.
 
 export default msalProviderConfig;
