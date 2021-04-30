@@ -50,6 +50,18 @@ router.route("/logIn").post((req, res) => {
   }
 });
 
+router.route("/logInWithInvite").post((req, res) => {
+  try {
+    console.log(req.body);
+
+    return res.status(200).json({message: "nothing"});
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(409).json({message: "nothing"});
+  }
+});
+
 app.use("/api/B2CProfileLookup", router);
 
 module.exports = createHandler(app);
