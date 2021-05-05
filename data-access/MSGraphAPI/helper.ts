@@ -2,7 +2,7 @@ import 'isomorphic-fetch';
 import MicrosoftGraph, { Client } from '@microsoft/microsoft-graph-client';
 import e from 'express';
 
-const MyAuthenticationProvider = require('./authConfig');
+const MyAuthenticationProvider = require('./MyAuthenticationProvider');
 const clientOptions = {
   authProvider: new MyAuthenticationProvider(),
 } as MicrosoftGraph.ClientOptions;

@@ -50,11 +50,64 @@ router.route('/logIn').post((req, res) => {
   }
 });
 
-router.route("/logInWithInvite").post((req, res) => {
+router.route("/signUpWithEmail").post((req, res) => {
+  console.log('signUpWithEmail');
   try {
     console.log(req.body);
+    var isEmailValid = false; //Database call to validate email
+    var expiredOTP = false //OTP is never expired at original sign up
 
-    return res.status(200).json({message: "nothing"});
+    if (isEmailValid){
+      //Email valid
+      return res.status(200).json({message: "nothing", expiredOTP: expiredOTP});
+    }
+    else {
+      //Email not valid
+      var unauthMessage = {
+        version: '1.0.1',
+        status: 409,
+        userMessage: 'Email not valid.',
+      } as conflictError;
+      return res.status(409).json(unauthMessage);
+    }
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(409).json({message: "nothing"});
+  }
+});
+
+router.route("/compareSignInEmail").post((req, res) => {
+  console.log('compareSignInEmail');
+  try {
+    console.log(req.body);
+    var validEmail = true;
+    //var originalLogInEmail = req.body.originalLogInEmail;
+    if (validEmail){
+      return res.status(200).json({message: "nothing"});
+    }
+    else {
+      var unauthMessage = {
+        version: '1.0.1',
+        status: 409,
+        userMessage: 'Email not valid.',
+      } as conflictError;
+      return res.status(409).json(unauthMessage);
+    }
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(409).json({message: "nothing"});
+  }
+});
+
+router.route("/checkOTPExpiration").post((req, res) => {
+  console.log('checkOTPExpiration');
+  try {
+    console.log(req.body);
+    var expiredOTP = true //Database call to check OTP expiration
+
+    return res.status(200).json({message: "nothing", expiredOTP: expiredOTP, originalLogInEmail: req.body.signInName});
   }
   catch (error) {
     console.log(error);

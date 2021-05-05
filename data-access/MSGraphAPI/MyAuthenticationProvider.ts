@@ -1,4 +1,3 @@
-import { AuthenticationProvider } from '@microsoft/microsoft-graph-client';
 import * as msal from '@azure/msal-node';
 
 const msalConfig = {
@@ -18,7 +17,7 @@ const tokenRequest = {
 // Create msal application object
 const cca = new msal.ConfidentialClientApplication(msalConfig);
 
-class MyAuthenticationProvider implements AuthenticationProvider {
+class MyAuthenticationProvider {
   /**
    * This method will get called before every request to the msgraph server
    * This should return a Promise that resolves to an accessToken (in case of success) or rejects with error (in case of failure)
