@@ -54,7 +54,7 @@ router.route("/signUpWithEmail").post((req, res) => {
   console.log('signUpWithEmail');
   try {
     console.log(req.body);
-    var isEmailValid = false; //Database call to validate email
+    var isEmailValid = true; //Database call to validate email
     var expiredOTP = false //OTP is never expired at original sign up
 
     if (isEmailValid){
@@ -108,6 +108,21 @@ router.route("/checkOTPExpiration").post((req, res) => {
     var expiredOTP = true //Database call to check OTP expiration
 
     return res.status(200).json({message: "nothing", expiredOTP: expiredOTP, originalLogInEmail: req.body.signInName});
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(409).json({message: "nothing"});
+  }
+});
+
+router.route("/saveNewUserOID").post((req, res) => {
+  console.log('saveNewUserOID');
+  try {
+    console.log(req.body);
+    //email: req.body.email
+    //objectId: req.body.objectId
+
+    return res.status(200).json({message: "nothing"});
   }
   catch (error) {
     console.log(error);
